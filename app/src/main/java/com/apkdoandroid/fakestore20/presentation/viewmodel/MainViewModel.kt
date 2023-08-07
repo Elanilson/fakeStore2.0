@@ -20,8 +20,6 @@ class MainViewModel @Inject constructor(private val produtoUseCase: ProdutoUseCa
     private val _Resposta = MutableLiveData<Resposta>()
     var resposta : LiveData<Resposta> = _Resposta
 
-    private val _erroLiveData = MutableLiveData<String?>()
-    val erroLiveData: LiveData<String?> get() = _erroLiveData
 
     fun recuperarProdutos(){
         viewModelScope.launch {
@@ -36,7 +34,7 @@ class MainViewModel @Inject constructor(private val produtoUseCase: ProdutoUseCa
                     }
                     is Resource.Error -> {
                         result.message?.let {message->
-                            _erroLiveData.value = message
+                            _Resposta.value = Resposta(message)
                         }
 
 

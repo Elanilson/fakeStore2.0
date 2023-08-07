@@ -37,11 +37,12 @@ class MainActivity : AppCompatActivity() {
     private fun observers() {
         viewModel.produtos.observe(this){
                 adapter.setData(it)
-
         }
 
-        viewModel.erroLiveData.observe(this){
-            Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT).show()
+        viewModel.resposta.observe(this){
+            if (it.status){
+                Toast.makeText(applicationContext, it.mensagem, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
